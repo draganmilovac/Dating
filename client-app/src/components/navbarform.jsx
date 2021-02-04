@@ -1,39 +1,56 @@
-import React, { Component, useState } from "react";
+import React, { useState, useContext } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import NavBarDropdown from "./navbardropdown";
-import Login from "./login";
-import Dropdown from "react-bootstrap/Dropdown";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { AuthContexht } from "./../shared/context/auth-context";
+import Button from "react-bootstrap/Button";
 
+toast.configure();
 const NavbarForm = (props) => {
+  const auth = useContext(AuthContexht);
   const [user, setUser] = useState({ username: "", password: "" });
-  const [isLogged, setIsLogged] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post("http://localhost:5000/api/user/login", user)
       .then((response) => {
         const u = response;
         if (u) {
           localStorage.setItem("token", u.data.token);
-          console.log(u.data.token);
-          setIsLogged(true);
+          toast.success("Successfuly logged", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: true,
+          });
+          auth.login();
         }
+      })
+      .catch((e) => {
+        console.log("Logged with error");
+        toast.error("Invalid username or password", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: true,
+        });
       });
   };
 
   const handlelogOut = () => {
-    if (isLogged === true) {
+    if (auth.isLoggedIn) {
+      auth.logout();
       localStorage.removeItem("token");
-      setIsLogged(false);
+      toast.info("Successfuly logged out", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: true,
+      });
     }
   };
 
   return (
     <Form inline>
-      {!isLogged && (
+      {!auth.isLoggedIn && (
         <FormControl
           type="text"
           placeholder="Username"
@@ -44,7 +61,7 @@ const NavbarForm = (props) => {
           }}
         />
       )}
-      {!isLogged && (
+      {!auth.isLoggedIn && (
         <FormControl
           type="text"
           placeholder="Password"
@@ -55,12 +72,14 @@ const NavbarForm = (props) => {
           }}
         />
       )}
-          {isLogged && (
-            <NavBarDropdown onLogout = {handlelogOut} username={user.username}/>
-          )}
-          {!isLogged && (
-            <Login onLogin ={handleLogin} />
-          )}
+      {auth.isLoggedIn && (
+        <NavBarDropdown onLogout={handlelogOut} username={user.username} />
+      )}
+      {!auth.isLoggedIn && (
+        <Button type="submit" variant="outline-success" onClick={handleLogin}>
+          Login
+        </Button>
+      )}
     </Form>
   );
 };

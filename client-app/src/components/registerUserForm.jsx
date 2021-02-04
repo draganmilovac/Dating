@@ -1,19 +1,62 @@
-import React, { Component, useState } from "react";
-import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from 'react-toastify';
 
 const RegisterUserForm = (props) => {
-const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ username: "", password: "" });
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/api/user/register", user)
+      .then((response) => {
+        const u = response;
+        if (u) {
+          localStorage.setItem("token", u.data.token);
+        }
+      }).catch((e) => {
+        toast.error("Errors with username or password", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose:true
+        });
+      })
+  };
   return (
-    <Form>
-      <Form.Group controlId="formGroupEmail">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-      </Form.Group>
-      <Form.Group controlId="formGroupPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-    </Form>
+    <div className="d-flex justify-content-center">
+          <form>
+            <h3>Sign Up</h3>
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Username"
+                value={user.username}
+                onChange={(u) => {
+                  setUser({ ...user, username: u.target.value });
+                }}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+                value={user.password}
+                onChange={(u) => {
+                  setUser({ ...user, password: u.target.value });
+                }}
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary btn-lg" onClick ={handleRegister}>
+              Register
+            </button>
+
+          </form>
+        </div>
   );
 };
 

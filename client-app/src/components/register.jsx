@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -13,7 +13,6 @@ const Register = () => {
           <Link to="/register">
             <button type="button" className="btn btn-primary btn-lg">Register</button>
           </Link>
-          <button className="btn btn-info btn-lg">Learn more</button>
         </div>
       </div>
       <div className="container">

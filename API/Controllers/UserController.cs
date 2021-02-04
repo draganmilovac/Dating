@@ -42,7 +42,7 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Register(UserForLogin userForLogin)
+        public async Task<IActionResult> Login(UserForLogin userForLogin)
         {
             var userFromRepo = await userService.Login(userForLogin.Username.ToLower(), userForLogin.Password);
             if (userFromRepo == null)
