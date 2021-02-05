@@ -16,7 +16,7 @@ const NavbarForm = (props) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:5000/api/user/login", user)
+      .post("http://localhost:5000/api/auth/login", user)
       .then((response) => {
         const u = response;
         if (u) {

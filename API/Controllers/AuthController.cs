@@ -14,11 +14,11 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUserService userService;
         private readonly IConfiguration config;
-        public UserController(IUserService userService, IConfiguration config)
+        public AuthController(IUserService userService, IConfiguration config)
         {
             this.userService = userService;
             this.config = config;
@@ -67,7 +67,8 @@ namespace API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }

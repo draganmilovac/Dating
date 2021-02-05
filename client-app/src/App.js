@@ -20,15 +20,16 @@ function App() {
 
   let routes;
   if (isLoggedIn) {
+    console.log(isLoggedIn);
     routes = (
       <Switch>
-        <Route path="/members" exact>
+        <Route path="/members">
           <Members />
         </Route>
-        <Route path="/lists" exact>
+        <Route path="/lists">
           <Lists />
         </Route>
-        <Route path="/messages" exact>
+        <Route path="/messages">
           <Messages />
         </Route>
         <Redirect to="/" />
@@ -40,20 +41,20 @@ function App() {
         <Route path="/" exact>
           <RegisterUserForm />
         </Route>
-        <Route path="/members" exact>
+        <Route path="/members">
           <Members />
         </Route>
-        <Route path="/lists" exact>
+        <Route path="/lists">
           <Lists />
         </Route>
-        <Route path="/messages" exact>
+        <Route path="/messages">
           <Messages />
         </Route>
         <Redirect to="/" />
       </Switch>
     );
   }
-  console.log(isLoggedIn);
+
   return (
     <AuthContexht.Provider
       value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
