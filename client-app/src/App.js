@@ -8,6 +8,7 @@ import Lists from "./pages/lists";
 import Messages from "./pages/messages";
 import NavBar from "./components/navigation/navbar";
 import { AuthContexht } from "./shared/context/auth-context";
+import UserList from "./components/user/userList";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
