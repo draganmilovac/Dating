@@ -9,6 +9,7 @@ import Messages from "./pages/messages";
 import NavBar from "./components/navigation/navbar";
 import { AuthContexht } from "./shared/context/auth-context";
 import UserList from "./components/user/userList";
+import UserDetail from "./components/user/userDetail";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,9 @@ function App() {
     console.log(isLoggedIn);
     routes = (
       <Switch>
+        <Route path="/members/:id" exact>
+          <UserDetail />
+        </Route>
         <Route path="/members">
           <Members />
         </Route>
@@ -41,6 +45,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <RegisterUserForm />
+        </Route>
+        <Route path="/members/:id" exact>
+          <UserDetail />
         </Route>
         <Route path="/members">
           <Members />
