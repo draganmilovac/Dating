@@ -21,6 +21,7 @@ function App() {
   }, []);
 
   let routes;
+  console.log(isLoggedIn);
   if (isLoggedIn) {
     console.log(isLoggedIn);
     routes = (
@@ -60,7 +61,6 @@ function App() {
         isLoggedIn: isLoggedIn,
         login: login,
         logout: logout,
-        token: null,
       }}
     >
       <Router>

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import axios from "axios";
@@ -70,6 +70,8 @@ const EditUser = (props) => {
     props.member.introduction,
     props.member.lookingFor,
     props.member.interests,
+    props.member.country,
+    props.member.city,
   ]);
   return (
     <div className="container mt-4">

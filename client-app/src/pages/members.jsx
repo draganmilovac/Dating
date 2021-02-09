@@ -4,9 +4,17 @@ import UserList from "../components/user/userList";
 
 const Members = () => {
   const [members, setMembers] = useState([]);
-  useEffect(async () => {
-    const result = await axios.get("http://localhost:5000/api/users");
-    setMembers(result.data);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get("http://localhost:5000/api/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setMembers(result.data);
+    }
+    fetchData();
   });
   return <UserList users={members} />;
 };

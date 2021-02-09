@@ -4,15 +4,13 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import NavBarDropdown from "./navbardropdown";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import { AuthContexht } from "./../shared/context/auth-context";
+import { AuthContexht } from "../../shared/context/auth-context";
 import Button from "react-bootstrap/Button";
 
 toast.configure();
 const NavbarForm = (props) => {
   const auth = useContext(AuthContexht);
   const [user, setUser] = useState({ username: "", password: "" });
-
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios

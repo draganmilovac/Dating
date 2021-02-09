@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavbarForm from "./../navbarform";
 import { AuthContexht } from "./../../shared/context/auth-context";
 import { Link } from "react-router-dom";
+import NavbarForm from "./navbarform";
 
 const NavLinks = () => {
   const auth = useContext(AuthContexht);

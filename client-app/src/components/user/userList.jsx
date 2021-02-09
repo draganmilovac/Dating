@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import UserItem from "./userItem";
-import CardColumns from "react-bootstrap/CardColumns";
 
 const UserList = (props) => {
   return (

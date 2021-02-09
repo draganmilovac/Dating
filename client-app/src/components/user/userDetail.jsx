@@ -10,9 +10,14 @@ const UserDetail = (props) => {
   const userId = useParams().id;
   const [member, setMember] = useState([]);
   const images = [{ original: member.photoUrl, thumbnail: member.photoUrl }];
-  useEffect(async () => {
-    const result = await axios.get(`http://localhost:5000/api/users/${userId}`);
-    setMember(result.data);
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        `http://localhost:5000/api/users/${userId}`
+      );
+      setMember(result.data);
+    }
+    fetchData();
   });
   return (
     <div className="container mt-4">
