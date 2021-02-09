@@ -1,7 +1,7 @@
 import React from "react";
-import Dropdown from "react-bootstrap/Dropdown"; 
-
-const NavBarDropdown = props => {
+import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
+const NavBarDropdown = (props) => {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -9,10 +9,11 @@ const NavBarDropdown = props => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-        <Dropdown.Item href="#/action-2" onClick={props.onLogout}>
-          Logout
-        </Dropdown.Item>
+        {" "}
+        <Dropdown.Item as={Link} to="/members/edit">
+          Edit
+        </Dropdown.Item>{" "}
+        <Dropdown.Item onClick={props.onLogout}>Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

@@ -7,5 +7,6 @@ namespace Domain.Interfaces
         Task<User> AddUser(User user);
         Task<User> GetUser(string username);
         Task<bool> AnyUser(string username);
+
     }
 }
